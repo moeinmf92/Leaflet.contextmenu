@@ -12,7 +12,6 @@
 }
 
 .leaflet-contextmenu.horizontal {
-    display: inline-flex;
     padding: 0px 4px;
 }
 

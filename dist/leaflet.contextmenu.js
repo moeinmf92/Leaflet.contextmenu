@@ -39,6 +39,7 @@ L.Map.ContextMenu = L.Handler.extend({
 
         this._items = [];
         this._visible = false;
+        this._direction = 'vertical';
 
         var container = this._container = L.DomUtil.create('div', L.Map.ContextMenu.BASE_CLS, map._container);
         container.style.zIndex = 10000;
@@ -99,11 +100,13 @@ L.Map.ContextMenu = L.Handler.extend({
             case 'vertical':
                 container.classList.add('vertical');
                 container.classList.remove('horizontal');
+                this._direction = direction;
                 
                 break;
             case 'horizontal':
                 container.classList.add('horizontal');
                 container.classList.remove('vertical');
+                this._direction = direction;
                 break;
             default:
                 break;
@@ -400,7 +403,7 @@ L.Map.ContextMenu = L.Handler.extend({
             this._setPosition(pt);
 
             if (!this._visible) {
-                this._container.style.display = 'block';
+                this._container.style.display = this._direction == 'vertical' ? 'block' : 'inline-flex';
                 this._visible = true;
             }
 
@@ -463,8 +466,7 @@ L.Map.ContextMenu = L.Handler.extend({
 
             el.style.left = '-999999px';
             el.style.right = 'auto';
-            el.style.display = 'block';
-
+            el.style.display = this._direction == 'vertical' ? 'block' : 'inline-flex';
             size.x = el.offsetWidth;
             size.y = el.offsetHeight;
 
