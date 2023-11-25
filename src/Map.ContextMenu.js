@@ -196,7 +196,7 @@ L.Map.ContextMenu = L.Handler.extend({
         if (options.separator || options === '-') {
             return this._createSeparator(container, index);
         }
-
+        this.options = options;
         var itemCls = L.Map.ContextMenu.BASE_CLS + '-item',
             cls = options.disabled ? (itemCls + ' ' + itemCls + '-disabled') : itemCls,
             el = this._insertElementAt('a', cls, container, index),
