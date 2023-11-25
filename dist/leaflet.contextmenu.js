@@ -42,7 +42,7 @@ L.Map.ContextMenu = L.Handler.extend({
         this._direction = 'vertical';
 
         var container = this._container = L.DomUtil.create('div', L.Map.ContextMenu.BASE_CLS, map._container);
-        var arrow_up = this._arrow_up = L.DomUtil.create('div', "arrow-up", container);
+        // var arrow_up = this._arrow_up = L.DomUtil.create('div', "arrow-up", container);
         container.style.zIndex = 10000;
         container.style.position = 'absolute';
 
