@@ -68,6 +68,23 @@ L.Map.ContextMenu = L.Handler.extend({
         }, this);
     },
 
+    setDirection: function (direction) {
+        var container = this._container;
+        switch (direction){
+            case 'vertical':
+                container.classList.add('vertical');
+                container.classList.remove('horizontal');
+                
+                break;
+            case 'horizontal':
+                container.classList.add('horizontal');
+                container.classList.remove('vertical');
+                break;
+            default:
+                break;
+        }
+    },
+
     showAt: function (point, data) {
         if (point instanceof L.LatLng) {
             point = this._map.latLngToContainerPoint(point);
