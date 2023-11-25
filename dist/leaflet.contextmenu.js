@@ -42,6 +42,7 @@ L.Map.ContextMenu = L.Handler.extend({
         this._direction = 'vertical';
 
         var container = this._container = L.DomUtil.create('div', L.Map.ContextMenu.BASE_CLS, map._container);
+        var arrow_up = this._arrow_up = L.DomUtil.create('div', "arrow-up", container);
         container.style.zIndex = 10000;
         container.style.position = 'absolute';
 
@@ -440,11 +441,11 @@ L.Map.ContextMenu = L.Handler.extend({
 
         container._leaflet_pos = pt;
 
-        if (pt.x + containerSize.x > mapSize.x) {
+        if ((pt.x + (containerSize.x / 2)) > mapSize.x) {
             container.style.left = 'auto';
             container.style.right = Math.min(Math.max(mapSize.x - pt.x, 0), mapSize.x - containerSize.x - 1) + 'px';
         } else {
-            container.style.left = Math.max(pt.x, 0) + 'px';
+            container.style.left = Math.max(pt.x - (containerSize.x / 2), 0) + 'px';
             container.style.right = 'auto';
         }
 
