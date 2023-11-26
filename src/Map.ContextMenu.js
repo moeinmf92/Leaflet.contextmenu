@@ -17,7 +17,7 @@ L.Map.ContextMenu = L.Handler.extend({
         this._direction = 'vertical';
 
         var container = this._container = L.DomUtil.create('div', L.Map.ContextMenu.BASE_CLS, map._container);
-        // var arrow_up = this._arrow_up = L.DomUtil.create('div', "arrow-up", container);
+        el = this._insertElementAt('div', L.Map.ContextMenu.BASE_CLS + '-arrow', this._container, 0)
         container.style.zIndex = 10000;
         container.style.position = 'absolute';
 
@@ -46,7 +46,7 @@ L.Map.ContextMenu = L.Handler.extend({
         }
 
         this._map.on({
-            contextmenu: this._show,
+            // contextmenu: this._show,
             mousedown: this._hide,
             zoomstart: this._hide
         }, this);
@@ -105,7 +105,7 @@ L.Map.ContextMenu = L.Handler.extend({
     },
 
     insertItem: function (options, index) {
-        index = index !== undefined ? index: this._items.length;
+        index = index !== undefined ? index: this._items.length + 1;
 
         var item = this._createItem(this._container, options, index);
 
@@ -208,7 +208,9 @@ L.Map.ContextMenu = L.Handler.extend({
             item,
             i, l;
 
-        for (i = 0, l = itemOptions.length; i < l; i++) {
+        
+
+        for (i = 1, l = itemOptions.length; i <= l; i++) {
             this._items.push(this._createItem(this._container, itemOptions[i]));
         }
     },
