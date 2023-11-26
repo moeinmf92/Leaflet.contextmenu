@@ -42,7 +42,6 @@ L.Map.ContextMenu = L.Handler.extend({
         this._direction = 'vertical';
 
         var container = this._container = L.DomUtil.create('div', L.Map.ContextMenu.BASE_CLS, map._container);
-        el = this._insertElementAt('div', L.Map.ContextMenu.BASE_CLS + '-arrow', this._container, 0)
         container.style.zIndex = 10000;
         container.style.position = 'absolute';
 
@@ -89,7 +88,7 @@ L.Map.ContextMenu = L.Handler.extend({
         }
 
         this._map.off({
-            contextmenu: this._show,
+            // contextmenu: this._show,
             mousedown: this._hide,
             zoomstart: this._hide
         }, this);
@@ -130,7 +129,7 @@ L.Map.ContextMenu = L.Handler.extend({
     },
 
     insertItem: function (options, index) {
-        index = index !== undefined ? index: this._items.length + 1;
+        index = index !== undefined ? index: this._items.length;
 
         var item = this._createItem(this._container, options, index);
 
@@ -233,9 +232,7 @@ L.Map.ContextMenu = L.Handler.extend({
             item,
             i, l;
 
-        
-
-        for (i = 1, l = itemOptions.length; i <= l; i++) {
+        for (i = 0, l = itemOptions.length; i < l; i++) {
             this._items.push(this._createItem(this._container, itemOptions[i]));
         }
     },
@@ -244,6 +241,7 @@ L.Map.ContextMenu = L.Handler.extend({
         if (options.separator || options === '-') {
             return this._createSeparator(container, index);
         }
+
         var itemCls = L.Map.ContextMenu.BASE_CLS + '-item',
             cls = options.disabled ? (itemCls + ' ' + itemCls + '-disabled') : itemCls,
             el = this._insertElementAt('a', cls, container, index),
@@ -470,6 +468,7 @@ L.Map.ContextMenu = L.Handler.extend({
             el.style.left = '-999999px';
             el.style.right = 'auto';
             el.style.display = this._direction == 'vertical' ? 'block' : 'inline-flex';
+
             size.x = el.offsetWidth;
             size.y = el.offsetHeight;
 
@@ -500,8 +499,7 @@ L.Map.ContextMenu = L.Handler.extend({
     }
 });
 
-L.Map.addInitHook('addHandler', 'contextmenu', L.Map.ContextMenu);
-L.Mixin.ContextMenu = {
+L.Map.addInitHook('addHandler', 'contextmenu', L.Map.ContextMenu);L.Mixin.ContextMenu = {
     bindContextMenu: function (options) {
         L.setOptions(this, options);
         this._initContextMenu();
